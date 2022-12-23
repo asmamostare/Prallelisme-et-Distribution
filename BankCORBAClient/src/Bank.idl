@@ -1,0 +1,18 @@
+module BankCORBA{
+
+	struct Compte {
+		long code;
+		double solde;
+	};
+	
+	typedef Compte cpte;
+	
+	interface Bank {
+		
+		void verser(in double montant);
+		void retirer(in double montant);
+		
+		cpte getCompte();		
+		
+	};
+};
