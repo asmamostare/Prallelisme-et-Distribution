@@ -5,6 +5,9 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
 import service.BankImpl;
 
 public class RMIServer {
@@ -19,10 +22,18 @@ public class RMIServer {
 			BankImpl objetDistant = new BankImpl();
 			
 			System.out.println(objetDistant.toString());
+
+			// Publication de l'objet distant en utilisant naming 
 			
-			// Publicatiion de l'objet distant
+			//Naming.rebind("rmi://localhost:1099/BK", objetDistant);
 			
-			Naming.rebind("rmi://localhost:1099/BK", objetDistant);
+			
+			// Publication de contexte jndi
+			
+			Context ctx = new InitialContext();
+			// publication de l'objet distant 
+			ctx.rebind("BK", objetDistant);
+			
 			
 		} catch ( Exception e) {
 			// TODO Auto-generated catch block
